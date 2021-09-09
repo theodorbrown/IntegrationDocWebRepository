@@ -1,0 +1,25 @@
+<svg>
+    <g class="rotation">
+        <circle cx="150" cy="75" r="30" fill="orange" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" transform="rotate(45,150,75)" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" transform="rotate(90,150,75)" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" transform="rotate(135,150,75)" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" transform="rotate(180,150,75)" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" transform="rotate(225,150,75)" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" transform="rotate(270,150,75)" />
+        <line x1="150" y1="45" x2="150" y2="20" stroke-width="6" stroke="orange" stroke-linecap="round" transform="rotate(315,150,75)" />
+    </g>
+</svg>
+<defs>
+    <style>
+        .rotation {
+            animation: tourne 1s linear infinite;
+            transform-origin: center;
+        }
+        @keyframes tourne {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</defs>
+

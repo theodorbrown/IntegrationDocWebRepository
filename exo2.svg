@@ -1,0 +1,7 @@
+<svg viewBox="0 0 600 1000">
+    <ellipse cx="250" cy="90" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
+    <ellipse cx="250" cy="250" rx="180" ry="70" fill="red"/>
+    <ellipse cx="250" cy="400" rx="180" ry="70" fill="darkred"/>
+
+
+</svg>
