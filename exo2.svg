@@ -1,6 +1,10 @@
 <svg viewBox="0 0 600 1000">
+    
+    <rect x="72" y="78" width="355" height="170" fill="#f0e2e2" stroke="black" stroke-width="3"/>
     <ellipse cx="250" cy="90" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
+    <rect x="72" y="260" width="355" height="150" fill="#bb4040" stroke="black" stroke-width="3"/>
     <ellipse cx="250" cy="250" rx="180" ry="70" fill="red"/>
+    
     <ellipse cx="250" cy="400" rx="180" ry="70" fill="darkred"/>
 
 
