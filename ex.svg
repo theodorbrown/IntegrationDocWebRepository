@@ -1,0 +1,9 @@
+<svg width="2010" height="500" viewBox="0 0 3000 2000" style="background: gray">
+
+    <rect x="0" y="0" width="4000" height="2000" fill="green" />
+    <rect x="900" y="1000" width="200" height="200" fill="black"/>
+    <circle cx="3000" cy="1800" r="200" fill="red"/>
+    <polygon points="-750 500, -1000 1000, -500 1000"/>
+
+
+</svg>
