@@ -17,8 +17,8 @@ let list = [
 
 function color() {
     list.forEach(function(item){
-        var sc = item[2];
-        var el = document.getElementById(item[1]);
+        let sc = item[2];
+        let el = document.getElementById(item[1]);
         switch (true) {
             case (0 < sc && sc <= 5) : 
                 el.style.fill = "#ffffe5";
