@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 400 200">
+
+<g transform="scale(1 0.5773)" transform-origin="0 64.6447">
+  <rect x="150" y="50" width="50" height="50" fill="red" 
+    transform="rotate(45)" transform-origin="200 100" />
+</g>
+
+<g transform="rotate(-30)" transform-origin="164.6447 64.6447">
+  <g transform="scale(0.5773 1)" transform-origin="164.6447 0">
+    <rect x="150" y="100" width="50" height="50" fill="blue" 
+      transform="rotate(45)" transform-origin="200 100" />
+</g>
+</g>
+
+<g transform="rotate(30)" transform-origin="235.3553 64.6447">
+  <g transform="scale(0.5773 1)" transform-origin="235.3553 0">
+    <rect x="200" y="50" width="50" height="50" fill="green" 
+      transform="rotate(45)" transform-origin="200 100" />
+  </g>
+</g>
+
+</svg>
