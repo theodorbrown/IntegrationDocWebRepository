@@ -55,8 +55,6 @@
     </svg>   
     
     <button onclick="color()">Color</button>
-    <button onclick="tri()">Tri</button>
-    <button onclick="ingenieur_dut()">Ingénieur/DUT</button>
 
 
     <label for="type-diplome">Choisir un type de diplome:</label>
@@ -81,6 +79,14 @@
 
         </tbody>
     </table>
+
+    <p id="resultat"></p>
+
+    <select  onchange="appliquer()" name="question" id="question">
+        <option value="">--Choisir une question--</option>
+        <option value="tri">Tri DUT</option>
+        <option value="inge_dut">Ingenieur/DUT</option>
+    </select>
 
 <script type="text/javascript" src="file.js"></script>
 <script type="text/javascript" src="../carte/filecorrect.js"></script>

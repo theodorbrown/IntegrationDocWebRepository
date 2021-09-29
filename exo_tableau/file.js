@@ -58,8 +58,8 @@ function ingenieur_dut() {
 
 //liste des fonctions
 const fonctions = [
-    {"code":"tri", "fonction": tri()},
-    {"code":"inge_dut", "fonction": ingenieur_dut()},
+    {"code":"tri", "fonction": tri},
+    {"code":"inge_dut", "fonction": ingenieur_dut},
 ]
 
 //select html
@@ -67,5 +67,11 @@ function appliquer() {
     let valueselect = document.getElementById("question").value
     let ligne = fonctions.find(f => f.code == valueselect);
     let t = ligne.fonction();
-    remplir(t);
+
+    if (Array.isArray(t)) {
+        remplir(t);
+    } else {
+        document.getElementById("resultat").innerHTML = t;
+    }
+    
 }
