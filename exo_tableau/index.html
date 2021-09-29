@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
-<meta charset="UTF-8">
-<title>Carte france</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<script type="text/javascript" src="filecorrect.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Etudiants</title>
+</head>
 <body>
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <svg xmlns="http://www.w3.org/2000/svg" width="575" height="575" 
@@ -52,7 +55,33 @@
     </svg>   
     
     <button onclick="color()">Color</button>
+    <button onclick="tri()">Tri</button>
 
 
+    <label for="type-diplome">Choisir un type de diplome:</label>
+    <select name="type-diplome" id="type-diplome">
+        <option value="BTS">BTS</option>
+        <option value="DUT">DUT</option>
+        <option value="MES">MES</option>
+        <option value="Ingenieur">Ingenieur</option>
+    </select>
+
+
+    <table class="table">
+        <thead>
+            <th>Code</th>
+            <th>Nom</th>
+            <th>BTS</th>
+            <th>DUT</th>
+            <th>MES</th>
+            <th>Ingenieur</th>
+        </thead>
+        <tbody id="databody">
+
+        </tbody>
+    </table>
+
+<script type="text/javascript" src="file.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>
