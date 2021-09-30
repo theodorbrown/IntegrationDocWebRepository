@@ -29,7 +29,7 @@ const couleurs = [
 
 function color() {
     for(region of list) {
-        const ligne = couleurs.find(c => c.maxi > region.taux);
-        document.getElementById(region.code).style.fill = ligne.couleur;
+        const lignesValides = couleurs.find(c => c.maxi > region.taux);
+        document.getElementById(region.code).style.fill = lignesValides.couleur;
     }
 }
