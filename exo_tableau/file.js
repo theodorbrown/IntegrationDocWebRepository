@@ -69,11 +69,42 @@ function regions_mes() {
     return tab;
 }
 
+//Existe-t-il au moins une région qui compte moins de 5 000 étudiants en école d'ingénieur ?
+function etu_inge() {
+    const rep = tableau.some(region => region.Ingenieur < 5000)
+    if (rep) {
+        return "Il y a au moins une région concernée";
+    } else {
+        return "Acune région n'est concernée";
+    }
+}
+
+//Est-ce que toutes les régions ont bien au moins 5 000 étudiants inscrits en DUT ?
+function etu_dut(){
+    const rep = tableau.every(region => region.DUT > 5000);
+    if (rep) {
+        return "Toutes les régions ont bien au moins 5 000 étudiants inscrits en DUT";
+    } else {
+        return "Toutes les regions ne sont pas concernées";
+    }
+}
+
+//Ajouter une colonne aux données qui calcule le nombre d'étudiants total dans chaque région.
+function add_column(){
+    //tableau qui fait la somme pour chaque région, contient donc plusieurs lignes de sommes
+    const map = tableau.map(column => column.sumEtuPerRegion = column.DUT + column.Ingenieur + column.MES + column.BTS);
+    return map;
+}
+
+
 //liste des fonctions
 const fonctions = [
     {"code":"tri", "fonction": tri},
     {"code":"inge_dut", "fonction": ingenieur_dut},
     {"code":"regions_mes", "fonction": regions_mes},
+    {"code":"etu_inge", "fonction": etu_inge},
+    {"code":"etu_dut", "fonction": etu_dut},
+    {"code":"add_column", "fonction": add_column},
 ]
 
 //balise select html
