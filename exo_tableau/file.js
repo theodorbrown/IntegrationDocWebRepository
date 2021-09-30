@@ -1,16 +1,16 @@
 let tableau = [
-    {code: "FR-IDF", nom:"Île-de-France", BTS:44049, DUT:17093, MES:28830, Ingenieur:42347},
-    {code: "FR-CVL", nom:"Centre-Val de Loire", BTS:8324, DUT:4511, MES:5171, Ingenieur:3071},
-    {code: "FR-BFC", nom:"Bourgogne-Franche-Comté", BTS:10102, DUT:5012, MES:5180, Ingenieur:4899},
-    {code: "FR-NOR", nom:"Normandie", BTS:11885, DUT:7011, MES:6471, Ingenieur:6497},
-    {code: "FR-HDF", nom:"Hauts-de-France", BTS:26320, DUT:10611, MES:14485, Ingenieur:16115},
-    {code: "FR-GES", nom:"Grand Est", BTS:21352, DUT:12778, MES:12215, Ingenieur:14102},
-    {code: "FR-PDL", nom:"Pays de la Loire", BTS:16704, DUT:5716, MES:5780, Ingenieur:10292},
-    {code: "FR-BRE", nom:"Bretagne", BTS:15467, DUT: 6653, MES:5835, Ingenieur:8853},
-    {code: "FR-NAQ", nom:"Nouvelle-Aquitaine", BTS:21606, MES:10082, DUT:11289, Ingenieur:8718},
-    {code: "FR-OCC", nom:"Occitanie", BTS:24394, DUT:10578, MES:9980, Ingenieur:14641},
-    {code: "FR-ARA", nom:"Auvergne-Rhône-Alpes", BTS:28795, DUT:17320, MES:14938, Ingenieur:23272},
-    {code: "FR-PAC", nom:"Provence-Alpes-Côte d'Azur", BTS:17893,DUT:7780, MES:10871, Ingenieur:5774}
+    {code: "FR-IDF", nom:"Île-de-France", BTS:44049, DUT:17093, MES:28830, Ingenieur:42347, TotalEtu: 0},
+    {code: "FR-CVL", nom:"Centre-Val de Loire", BTS:8324, DUT:4511, MES:5171, Ingenieur:3071, TotalEtu: 0},
+    {code: "FR-BFC", nom:"Bourgogne-Franche-Comté", BTS:10102, DUT:5012, MES:5180, Ingenieur:4899, TotalEtu: 0},
+    {code: "FR-NOR", nom:"Normandie", BTS:11885, DUT:7011, MES:6471, Ingenieur:6497, TotalEtu: 0},
+    {code: "FR-HDF", nom:"Hauts-de-France", BTS:26320, DUT:10611, MES:14485, Ingenieur:16115, TotalEtu: 0},
+    {code: "FR-GES", nom:"Grand Est", BTS:21352, DUT:12778, MES:12215, Ingenieur:14102, TotalEtu: 0},
+    {code: "FR-PDL", nom:"Pays de la Loire", BTS:16704, DUT:5716, MES:5780, Ingenieur:10292, TotalEtu: 0},
+    {code: "FR-BRE", nom:"Bretagne", BTS:15467, DUT: 6653, MES:5835, Ingenieur:8853, TotalEtu: 0},
+    {code: "FR-NAQ", nom:"Nouvelle-Aquitaine", BTS:21606, MES:10082, DUT:11289, Ingenieur:8718, TotalEtu: 0},
+    {code: "FR-OCC", nom:"Occitanie", BTS:24394, DUT:10578, MES:9980, Ingenieur:14641, TotalEtu: 0},
+    {code: "FR-ARA", nom:"Auvergne-Rhône-Alpes", BTS:28795, DUT:17320, MES:14938, Ingenieur:23272, TotalEtu: 0},
+    {code: "FR-PAC", nom:"Provence-Alpes-Côte d'Azur", BTS:17893,DUT:7780, MES:10871, Ingenieur:5774, TotalEtu: 0}
 ]
 
 const palette = [
@@ -38,6 +38,7 @@ function remplir(tab) {
             <td>${region.DUT}</td>
             <td>${region.MES}</td>
             <td>${region.Ingenieur}</td>
+            <td>${region.TotalEtu}</td>
         </tr>`
     }
     return document.getElementById("databody").innerHTML = contenu;
@@ -91,32 +92,76 @@ function etu_dut(){
 
 //Ajouter une colonne aux données qui calcule le nombre d'étudiants total dans chaque région.
 function add_column(){
-    //tableau qui fait la somme pour chaque région, contient donc plusieurs lignes de sommes
-    const map = tableau.map(column => column.sumEtuPerRegion = column.DUT + column.Ingenieur + column.MES + column.BTS);
-    return map;
+    const ligneSomme = tableau.map(column => column.sumEtuPerRegion = column.DUT + column.Ingenieur + column.MES + column.BTS);
+    //rempli le tableau d'origine par les valeurs de chaque ligne (entrée)
+    for(i in ligneSomme) {
+        tableau[i].TotalEtu = ligneSomme[i];
+    }
+    return tableau;
 }
 
+//Calculer le nombre total d'étudiants
+function total_etu() {
+    const ligneSomme = tableau.map(column => column.sumEtuPerRegion = column.DUT + column.Ingenieur + column.MES + column.BTS);
+    const tabSomme = ligneSomme.reduce((prevValue, curValue) => prevValue + curValue);
+    return tabSomme
+}
+
+//Sélectionner la région qui possède le plus d'étudiant en BTS.
+//Utiliser la fonction reduce pour effecuer la sélection
+function max_bts() {
+     const max = tableau.reduce((acc, region) => {
+         //début avec acc null, pas 0 au cas ou on ait des valeurs negatives dans le tableau par ex.
+         //pour chaque ligne on teste si par région le nb est supperieur à l'acc
+        if (acc === null || region.BTS > acc) {
+            return region.BTS; //Quand valeur lue > acc
+        }
+        return acc; // Quand acc > valeur lue
+      }, null);
+
+    const entree = tableau.filter(elt => elt.BTS == max);
+    //console.log(entree[0].nom);
+    return entree;
+}
+
+//Calculer le nombre total d'étudiants en comptabilisant uniquement les régions qui possède plus de 6000
+// étudiants en MES.
+function total_mes_6000() {
+    const somme = tableau.filter(elt => elt.MES > 6000).map(item => item.MES).reduce((prev, next) => prev + next);
+    return somme + " Etudiants MES dans les régions >6000";
+}
 
 //liste des fonctions
 const fonctions = [
-    {"code":"tri", "fonction": tri},
-    {"code":"inge_dut", "fonction": ingenieur_dut},
-    {"code":"regions_mes", "fonction": regions_mes},
-    {"code":"etu_inge", "fonction": etu_inge},
-    {"code":"etu_dut", "fonction": etu_dut},
-    {"code":"add_column", "fonction": add_column},
+    {code:"tri", fonction: tri},
+    {code:"inge_dut", fonction: ingenieur_dut},
+    {code:"regions_mes", fonction: regions_mes},
+    {code:"etu_inge", fonction: etu_inge},
+    {code:"etu_dut", fonction: etu_dut},
+    {code:"add_column", fonction: add_column},
+    {code:"total_etu", fonction: total_etu},
+    {code:"max_bts", fonction: max_bts},
+    {code:"total_mes_6000", fonction: total_mes_6000}
 ]
 
 //balise select html
 function appliquer() {
-    let valueselect = document.getElementById("question").value
-    let ligne = fonctions.find(f => f.code == valueselect);
-    let t = ligne.fonction();
-
+    let valueselected = document.getElementById("question").value;
+    let func = fonctions.find(f => f.code == valueselected);
+    let t = func.fonction();
     if (Array.isArray(t)) {
         remplir(t);
     } else {
         document.getElementById("resultat").innerHTML = t;
     }
-    
 }
+
+
+/**
+ * La méthode reduce() applique une fonction qui est un « accumulateur » 
+ * et qui traite chaque valeur d'une liste (de la gauche vers la droite) 
+ * afin de la réduire à une seule valeur.
+ * 
+ * La méthode map() crée un nouveau tableau avec les résultats de l'appel
+ * d'une fonction fournie sur chaque élément du tableau appelant.
+ */
