@@ -72,8 +72,12 @@ function regions_mes() {
 
 //Existe-t-il au moins une région qui compte moins de 5 000 étudiants en école d'ingénieur ?
 function etu_inge() {
-    const rep = tableau.some(region => region.Ingenieur < 5000)
+    const rep = tableau.some(region => region.Ingenieur < 5000);
+    const lines = tableau.filter(region => region.Ingenieur < 5000);
     if (rep) {
+        for(line of lines){
+            document.getElementById(line.code).style.fill = "purple";
+        }
         return "Il y a au moins une région concernée";
     } else {
         return "Acune région n'est concernée";
@@ -83,6 +87,10 @@ function etu_inge() {
 //Est-ce que toutes les régions ont bien au moins 5 000 étudiants inscrits en DUT ?
 function etu_dut(){
     const rep = tableau.every(region => region.DUT > 5000);
+    const lines = tableau.filter(region => region.DUT > 5000);
+    for(line of lines){
+        document.getElementById(line.code).style.fill = "pink";
+    }
     if (rep) {
         return "Toutes les régions ont bien au moins 5 000 étudiants inscrits en DUT";
     } else {
@@ -120,6 +128,7 @@ function max_bts() {
       }, null);
 
     const entree = tableau.filter(elt => elt.BTS == max);
+    document.getElementById(entree[0].code).style.fill = "green";
     //console.log(entree[0].nom);
     return entree;
 }
@@ -164,4 +173,8 @@ function appliquer() {
  * 
  * La méthode map() crée un nouveau tableau avec les résultats de l'appel
  * d'une fonction fournie sur chaque élément du tableau appelant.
+ * 
+ * La méthode filter() crée et retourne un nouveau tableau contenant
+ * tous les éléments du tableau d'origine qui remplissent une condition 
+ * déterminée par la fonction callback.
  */
