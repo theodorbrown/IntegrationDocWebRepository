@@ -56,8 +56,17 @@ const fonctions = [
      {code:"q18", fonction: function() { 
         document.querySelectorAll(".machine.injection+.stock").forEach(elt => elt.classList.add("occupe"));
      } },
-     {code:"q19", fonction: function() { 
-        document.querySelectorAll(".machine.injection.indisponible ~ .machine.moulage").forEach(elt => elt.classList.add("occupe"));
+     {code:"q19", fonction: function() {
+        document.querySelectorAll(".machine.injection.indisponible").forEach(elt => elt.parentElement.querySelectorAll(".machine.moulage").forEach(elt => elt.classList.add("occupe")));
+     } },
+     {code:"q20", fonction: function() {
+        document.querySelectorAll(".machine:only-child").forEach(elt => elt.classList.add("occupe"));
+     } },
+     {code:"q21", fonction: function() {
+        document.querySelectorAll(".IlotA .machine:not(.indisponible)").forEach(elt => elt.classList.add("occupe"));
+     } },
+     {code:"q22", fonction: function() {                        //data-quantite='30'
+        [...document.querySelectorAll(".stock")].filter(elt => elt.dataset.quantite > 30).forEach(elt => elt.classList.add("occupe"));
      } },
 
 ]
@@ -97,9 +106,9 @@ function appliquer() {
  * les éléments immédiatement enfants de l’IlotC. OK
  * les éléments stock qui suivent un élément machine injection. OK
  * les éléments machine moulage dans le même ilot qu’une machine injection indisponible. OK
- * la seule machine de son groupe.
- * les machines de l’Ilot A qui ne sont pas indisponible
- * Les stocks avec une quantité supérieur à 30
- * Les stocks avec date d’inventaire supérieure à 12 août 2020
+ * la seule machine de son groupe. OK
+ * les machines de l’Ilot A qui ne sont pas indisponible OK
+ * Les stocks avec une quantité supérieur à 30 OK
+ * Les stocks avec date d’inventaire supérieure à 12 août 2020 OK
  * le groupe vide dans l’IotC et déplacer les machines de moulage de l’IlotC à l’intérieur
  */
