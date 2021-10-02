@@ -40,7 +40,7 @@ function remplir(tab) {
             <td>${region.Ingenieur}</td>
             <td>${region.TotalEtu}</td>
         </tr>`
-    }
+    }// ?? sur ${region.TotalEtu} test si une valeur existe pour la colonne
     return document.getElementById("databody").innerHTML = contenu;
 }
 remplir(tableau);
@@ -100,19 +100,20 @@ function etu_dut(){
 
 //Ajouter une colonne aux données qui calcule le nombre d'étudiants total dans chaque région.
 function add_column(){
-    const ligneSomme = tableau.map(column => column.sumEtuPerRegion = column.DUT + column.Ingenieur + column.MES + column.BTS);
-    //rempli le tableau d'origine par les valeurs de chaque ligne (entrée)
-    for(i in ligneSomme) {
-        tableau[i].TotalEtu = ligneSomme[i];
-    }
+    tableau.map(column => column.TotalEtu = column.DUT + column.Ingenieur + column.MES + column.BTS);
+   /**
+    *  for(i in ligneSomme) {
+    *    tableau[i].TotalEtu = ligneSomme[i];
+    *   }
+    *  */
     return tableau;
 }
 
 //Calculer le nombre total d'étudiants
 function total_etu() {
-    const ligneSomme = tableau.map(column => column.sumEtuPerRegion = column.DUT + column.Ingenieur + column.MES + column.BTS);
+    const ligneSomme = tableau.map(column => column.TotalEtu = column.DUT + column.Ingenieur + column.MES + column.BTS);
     const tabSomme = ligneSomme.reduce((prevValue, curValue) => prevValue + curValue);
-    return tabSomme
+    return tabSomme;
 }
 
 //Sélectionner la région qui possède le plus d'étudiant en BTS.
@@ -132,12 +133,13 @@ function max_bts() {
     //console.log(entree[0].nom);
     return entree;
 }
+//tableau.reduce((acc, regions) => acc = region.BTS > acc.BTS ? region : acc); <<-- correction
 
 //Calculer le nombre total d'étudiants en comptabilisant uniquement les régions qui possède plus de 6000
 // étudiants en MES.
 function total_mes_6000() {
-    const somme = tableau.filter(elt => elt.MES > 6000).map(item => item.MES).reduce((prev, next) => prev + next);
-    return somme + " Etudiants MES dans les régions >6000";
+    const somme = tableau.filter(elt => elt.MES > 6000).map(item => item.DUT + item.Ingenieur + item.MES + item.BTS).reduce((acc, next) => acc + next);
+    return somme + " Etudiants dans les régions >6000 MES";
 }
 
 //liste des fonctions
