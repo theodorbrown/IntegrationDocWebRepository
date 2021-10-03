@@ -1,7 +1,7 @@
 const fonctions = [
     {code:"q1", fonction: function() {
-        [...document.getElementsByTagName("rect")].forEach(elt => elt.classList.add("occupe"));
-        //document.querySelectorAll(".rect").forEach(elt => elt.classList.add("occupe")); <-- Marche pour tous les selecteurs
+        //[...document.getElementsByTagName("rect")].forEach(elt => elt.classList.add("occupe"));
+        document.querySelectorAll("rect").forEach(elt => elt.classList.add("occupe")); //<-- Marche pour tous les selecteurs
      } },
      {code:"q2", fonction: function() { 
          document.querySelector("#machine41664").classList.add("occupe"); // <-- Renvoi une seule ligne pas de liste/tableau
@@ -23,10 +23,11 @@ const fonctions = [
      {code:"q7", fonction: function() { 
         document.querySelectorAll(".machine[data-fabricant='Billon']").forEach(elt => elt.classList.add("occupe"));
      } },
-     {code:"q8", fonction: function() { 
+     //='vis' que classe vis ~='vis' dont la classe vis *='vis' contient les lettres vis
+     {code:"q8", fonction: function() { //vis et d'autres classe avec pas que la classe vis
         document.querySelectorAll(".stock[data-articles~='vis']").forEach(elt => elt.classList.add("occupe"));
      } },
-     {code:"q9", fonction: function() { 
+     {code:"q9", fonction: function() {
         document.querySelectorAll(".stock[data-articles*='vis']").forEach(elt => elt.classList.add("occupe"));
      } },
      {code:"q10", fonction: function() { 
