@@ -24,7 +24,10 @@
     <circle cx="540" cy="1550" r="30" fill="black" />
     <circle cx="540" cy="362" r="30" fill="black" />
 
-    <line x1="540" x2="540" y1="300" y2="433" stroke="black" stroke-width="7"/>
+    <line x1="540" x2="540" y1="300" y2="433" stroke="black" stroke-width="7">
+        <animate attributeName="x2" from="50" to="100" begin="1s" dur="2s" /> 
+        <animate attributeName="y2" from="50" to="100" begin="1s" dur="2s" /> 
+    </line>
     <line x1="540" x2="540" y1="900" y2="1033" stroke="black" stroke-width="7"/>
     <line x1="540" x2="540" y1="1483" y2="1620" stroke="black" stroke-width="7"/>
 
