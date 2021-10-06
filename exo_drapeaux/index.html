@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Drapeaux</title>
+</head>
+<body>
+    <div id="">
+        <select  onchange="charger2()" name="question" id="question">
+            <option value="">--Choisir une question--</option>
+            <option value="fr">France</option>
+            <option value="it">Italie</option>
+            <option value="be">Belgique</option>
+            <option value="lu">Luxembourg</option>
+            <option value="de">Allemagne</option>
+            <option value="ch">Suisse</option>
+            <option value="tchou">Trafalgare</option>
+        </select>
+    </div>
+    <div id="drapeau" class="p-2"></div>
+    <p>
+        <input type="text" id="entree">
+        <button onclick="verifier2()">Vérifier</button>
+    </p>
+    <div id="res_nb" class="p-2"></div>
+
+</body>
+<script type="text/javascript" src="file.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</html>
