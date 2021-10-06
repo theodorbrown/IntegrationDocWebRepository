@@ -7,7 +7,6 @@ function checkImage(path){
   })
 }
 
-
 function charger() {
   document.getElementById("drapeau").innerHTML = "";
   var code_pays = document.getElementById("question").value;
@@ -88,18 +87,23 @@ function charger() {
 async function displayStations() {
   let data = await fetch("https://workshop.neotechweb.net/ws/skimap/1.0.0/stations.php?massif=2");
   let datajson = await data.json();
-
+  //console.log(datajson)
   datajson.forEach(elt => {
-    let ligne = document.getElementById("ligne")
-    let clone = document.importNode(ligne.content, true)
+    let ligne = document.getElementById("ligne");//le template
+    let clone = document.importNode(ligne.content, true);
     let colonnes = clone.querySelectorAll("td");
     colonnes[0].innerText = elt.nom;
-    colonnes[1].innerText = elt.altitude_maxi;
-    colonnes[2].innerText = elt.lat;
-    colonnes[3].innerText = elt.lng;
-    document.querySelector("tbody").appendChild(clone)
-
+    colonnes[1].innerText = elt.lat;
+    colonnes[2].innerText = elt.lng;
+    document.querySelector("tbody").appendChild(clone);
   });
 }
 
 displayStations()
+
+/**
+ *  L'élément HTML <template> (ou Template Content ou modèle de contenu) est un mécanisme
+ *  utilisé pour stocker du contenu HTML (côté client) qui ne doit pas être affiché lors
+ *  du chargement de la page mais qui peut être instancié et affiché par la suite grâce
+ *  à un script JavaScript.
+ */
