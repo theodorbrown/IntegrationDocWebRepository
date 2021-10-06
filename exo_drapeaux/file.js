@@ -43,6 +43,12 @@ function charger() {
     });
   }
 
+  function multipleDix() {
+    return new Promise((resolve, reject) => {
+      if (nombre%10 == 0) resolve(); else reject();
+    });
+  }
+
   function verifier() {
     document.getElementById("res_nb").innerHTML = "";
     let entree = document.getElementById("entree").value;
@@ -64,11 +70,18 @@ function charger() {
     }
   }
 
-  function multipleDix() {
-    return new Promise((resolve, reject) => {
-      if (nombre%10 == 0) resolve(); else reject();
-    });
-  }
+  /**
+   * Si une promesse est juste : then, si toutes fausses : catch
+   * Promise.any([])
+   *  .then(() => )
+   *  .catch(() => )
+   */
 
+    /**
+   * Si toutes les prommesses sont justes : then sinon catch
+   * Promise.all([])
+   *  .then(() => )
+   *  .catch(() => )
+   */
 
   
