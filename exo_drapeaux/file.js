@@ -85,3 +85,6 @@ function charger() {
    */
 
   
+async function displayStations() {
+  
+}
