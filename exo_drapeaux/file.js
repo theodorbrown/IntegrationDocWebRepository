@@ -84,7 +84,22 @@ function charger() {
    *  .catch(() => )
    */
 
-  
+
 async function displayStations() {
-  
+  let data = await fetch("https://workshop.neotechweb.net/ws/skimap/1.0.0/stations.php?massif=2");
+  let datajson = await data.json();
+
+  datajson.forEach(elt => {
+    let ligne = document.getElementById("ligne")
+    let clone = document.importNode(ligne.content, true)
+    let colonnes = clone.querySelectorAll("td");
+    colonnes[0].innerText = elt.nom;
+    colonnes[1].innerText = elt.altitude_maxi;
+    colonnes[2].innerText = elt.lat;
+    colonnes[3].innerText = elt.lng;
+    document.querySelector("tbody").appendChild(clone)
+
+  });
 }
+
+displayStations()

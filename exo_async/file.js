@@ -8,7 +8,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 async function getStations() {
   let data = await fetch("https://workshop.neotechweb.net/ws/skimap/1.0.0/stations.php?massif=2");
   let datajson = await data.json();
-  console.log(datajson)
 
   let resultats =  datajson.filter(el => !!el.lng && !!el.lat)
   resultats.forEach(element => {
