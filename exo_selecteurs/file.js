@@ -67,8 +67,28 @@ const fonctions = [
         document.querySelectorAll(".IlotA .machine:not(.indisponible)").forEach(elt => elt.classList.add("occupe"));
      } },
      {code:"q22", fonction: function() {                        //data-quantite='30'
-        [...document.querySelectorAll(".stock")].filter(elt => elt.dataset.quantite > 30).forEach(elt => elt.classList.add("occupe"));
+        [...document.querySelectorAll(".stock[data-quantite]")].filter(elt => elt.dataset.quantite > 30).forEach(elt => elt.classList.add("occupe"));
      } },
+     {code:"q23", fonction: function() {
+      [...document.querySelectorAll(".stock[data-inventaire]")].filter(elt => new Date(elt.dataset.inventaire) > new Date(2020, 7, 12)).forEach(elt => elt.classList.add("occupe"));
+     } },
+     {code:"q24", fonction: function() {
+        var groupeVide = document.querySelector(".IlotC g:empty");
+        var elementsMoulage = document.querySelectorAll(".IlotC .moulage");
+        elementsMoulage.forEach(elt => groupeVide.appendChild(elt));
+     } },
+     //ajouter un cercle dans le groupe vide
+     {code:"q25", fonction: function() {
+      var groupeVide = document.querySelector(".IlotC g:empty");
+      //créer un element SVG : createElementNS
+      var cercle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      cercle.setAttribute("r", "15");
+      cercle.setAttribute("cx", "7.5");
+      cercle.setAttribute("cy", "7.5");
+      cercle.setAttribute("fill", "purple");
+
+      groupeVide.appendChild(cercle);
+   } },
 
 ]
 
@@ -110,6 +130,6 @@ function appliquer() {
  * la seule machine de son groupe. OK
  * les machines de l’Ilot A qui ne sont pas indisponible OK
  * Les stocks avec une quantité supérieur à 30 OK
- * Les stocks avec date d’inventaire supérieure à 12 août 2020 OK
+ * Les stocks avec date d’inventaire supérieure à 12 août 2020 
  * le groupe vide dans l’IotC et déplacer les machines de moulage de l’IlotC à l’intérieur
  */
