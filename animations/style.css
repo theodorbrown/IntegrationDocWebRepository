@@ -1,0 +1,11 @@
+.rob{
+    transition: 0.2s transform;
+  }
+
+ellipse{
+    transition: 1s all;
+}
+
+rect{
+    transition: 1s all;
+}

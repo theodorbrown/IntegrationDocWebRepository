@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Animations cuve</title>
 </head>
 <body>
     <svg viewBox="0 0 1800 1800">
-        <rect x="71" y="80" width="356" height="200" fill="#f0e2e2" stroke="black" stroke-width="3"/>
+        <rect x="71" y="80" width="356" height="360" fill="transparent" stroke="black" stroke-width="3"/>
         <ellipse cx="250" cy="90" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
-        <rect x="72" y="290" width="356" height="150" fill="#bb4040" stroke="black" stroke-width="3"/>
-        <ellipse cx="250" cy="280" rx="180" ry="70" fill="red"/>
+        <rect id="rect_rouge"x="72" y="290" width="356" height="150" fill="#bb4040" stroke="black" stroke-width="3"/>
+
         <ellipse cx="250" cy="450" rx="180" ry="70" fill="darkred"/>
-    
-        <rect x="71" y="680" width="356" height="350" fill="#57b357"/>
-        <ellipse cx="250" cy="680" rx="180" ry="70" fill="darkgreen"/>
-        <ellipse cx="250" cy="1020" rx="180" ry="70" fill="darkgreen"/>
-    
-        <rect x="71" y="1250" width="356" height="200" fill="#f0e2e2" stroke="black" stroke-width="3"/>
+        <ellipse id="cer_rouge" cx="250" cy="280" rx="180" ry="70" fill="red"/>
+       
+        <rect x="71" y="668" width="356" height="350" fill="transparent" stroke="black" stroke-width="3"/>
+        <ellipse cx="249" cy="680" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
+        <rect id="rect_vert" x="71" y="680" width="356" height="350" fill="#57b357"/>
+        <ellipse id="cer_vert" cx="250" cy="680" rx="180" ry="70" fill="darkgreen"/>
+        <ellipse cx="249" cy="1020" rx="180" ry="70" fill="darkgreen"/>
+        
+        
+        <rect x="71" y="1240" width="356" height="400" fill="transparent" stroke="black" stroke-width="3"/>
+
         <ellipse cx="250" cy="1250" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
-        <rect x="71" y="1420" width="356" height="210" fill="#5555ce" stroke="black" stroke-width="3"/>
-        <ellipse cx="250" cy="1420" rx="180" ry="70" fill="darkblue" stroke="black" stroke-width="3"/>
-        <ellipse cx="250" cy="1640" rx="180" ry="70" fill="#010124" stroke="black" stroke-width="3"/>
+        <rect id="rect_bleu" x="71" y="1420" width="356" height="210" fill="#5555ce" stroke="black" stroke-width="3"/>
+        <ellipse id="cer_bleu" cx="248" cy="1420" rx="180" ry="70" fill="darkblue" stroke="black" stroke-width="3"/>
+        <ellipse cx="248" cy="1640" rx="180" ry="70" fill="#010124" stroke="black" stroke-width="3"/>
     
         <line x1="750" x2="750" y1="363" y2="1550" stroke="black" stroke-width="7"/>
         <line x1="425" x2="750" y1="1550" y2="1550" stroke="black" stroke-width="7"/>
@@ -33,26 +39,34 @@
         <circle cx="540" cy="1550" r="30" fill="black" />
         <circle cx="540" cy="362" r="30" fill="black" />
     
-        <line x1="540" x2="540" y1="300" y2="433" stroke="black" stroke-width="7">
-            <animate attributeName="x1" from="540" to="470" begin="1s" dur="3s" repeatCount="indefinite"/> 
-            <animate attributeName="x2" from="540" to="600" begin="1s" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="y1" from="300" to="363" begin="1s" dur="3s" repeatCount="indefinite"/> 
-            <animate attributeName="y2" from="433" to="363" begin="1s" dur="3s" repeatCount="indefinite"/>  
-        </line>
-        <line x1="540" x2="540" y1="900" y2="1033" stroke="black" stroke-width="7"/>
-        <line x1="540" x2="540" y1="1483" y2="1620" stroke="black" stroke-width="7"/>
-    
+        <!--<line class="robinets" x1="540" x2="540" y1="300" y2="433" stroke="red" stroke-width="7"/>
+        <line class="robinets" x1="540" x2="540" y1="900" y2="1033" stroke="black" stroke-width="7"/>
+        <line class="robinets" x1="540" x2="540" y1="1483" y2="1620" stroke="black" stroke-width="7"/>-->
+        <defs id="test">
+            <g id="robinets">
+                <line x1="540" x2="540" y1="300" y2="433" stroke="red" stroke-width="7"/>
+            </g>
+        </defs>
+
+        <use id="rob1" class="rob" x="0" y="0" href="#robinets" />
+        <use id="rob2" class="rob" x="0" y="600" href="#robinets" />
+        <use id="rob3" class="rob" x="0" y="1190" href="#robinets" />
+        
+
         <line x1="750" x2="900" y1="1283" y2="1283" stroke="black" stroke-width="7"/>
-    
-        <rect x="900" y="1050" width="356" height="200" fill="#f0e2e2" stroke="black" stroke-width="3"/>
+        
+        <rect x="900" y="1050" width="356" height="400" fill="white" stroke="black" stroke-width="3"/>
         <ellipse cx="1077" cy="1050" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
-        <rect x="900" y="1220" width="356" height="210" fill="#5555ce" stroke="black" stroke-width="3"/>
-        <ellipse cx="1077" cy="1220" rx="180" ry="70" fill="darkblue" stroke="black" stroke-width="3"/>
-        <ellipse cx="1077" cy="1440" rx="180" ry="70" fill="#010124" stroke="black" stroke-width="3"/>
+        <!--garder-->
+        <ellipse cx="1077" cy="1440" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
+        <ellipse cx="1077" cy="1440" rx="180" ry="70" fill="white" stroke="black" stroke-width="3"/>
+        <!--garder-->
     
         <rect x="840" y="100" width="100" height="200" fill="white" stroke="black" stroke-width="3"/>
-        <circle cx="888" cy="155" r="30" fill="red"/>
-        <circle cx="888" cy="250" r="30" fill="#e6cccc"/>
+        <circle id="circle_red" cx="888" cy="155" r="30" fill="red"/>
+        <circle id="circle_green" cx="888" cy="250" r="30" fill="#e6cccc"/>
     </svg>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
 </body>
+<script src="file.js"></script>
 </html>
