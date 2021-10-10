@@ -13,7 +13,8 @@ let opened1 = false;
 let opened2 = false;
 let opened3 = false;
 
-let done = false
+let done = false;
+let stoped = false;
 
 
 robinets.forEach((e) => {
@@ -27,6 +28,7 @@ robinets.forEach((e) => {
 function action(e) {
     if(e.getAttribute("id") == "rob1"){
         if (!opened1){
+            stoped = false;
             e.style.transform = "rotate(90deg)";
             accumulateur(cuve1, "cer_rouge", "rect_rouge");
             opened1 = true;
@@ -34,57 +36,75 @@ function action(e) {
         } else {
             e.style.transform = "rotate(180deg)";
             opened1 = false;
-            //make it stop
+            stoped = true;
         }
     }
     if(e.getAttribute("id") == "rob2"){
         if (!opened2){
+            stoped = false;
             e.style.transform = "rotate(90deg)";
             accumulateur(cuve2, "cer_vert", "rect_vert");
+            opened2 = true;
         } else {
             e.style.transform = "rotate(180deg)";
             opened2 = false;
-            console.log("2 else");
+            stoped = true;
+            console.log("bici")
         }
     }
     if(e.getAttribute("id") == "rob3"){
         if (!opened3){
+            stoped = false;
             e.style.transform = "rotate(90deg)";
             accumulateur(cuve3, "cer_bleu", "rect_bleu");
+            opened3 = true;
         } else {
             e.style.transform = "rotate(180deg)";
             opened3 = false;
-            console.log("3 else");
+            stoped = true;
         }
     }
 }
 
 
 async function accumulateur(cuveN, objId, objId2) {
-    let declencheur = false;
-    //cercle (objId)
-    if(cuveN.cyC.from < cuveN.cyC.to) {
-        cuveN.cyC.from+= 0.5;
-        document.getElementById(objId).setAttribute("cy",cuveN.cyC.from);
-        declencheur = true
-    }
-    //height rect (objId2)
-    if(cuveN.heightR.from > cuveN.heightR.to) {
-        cuveN.heightR.from-=0.5;
-        document.getElementById(objId2).setAttribute("height",cuveN.heightR.from);
-        declencheur = true
-    }
-    //y rect (objId2)
-    if(cuveN.yR.from < cuveN.yR.to) {
-        cuveN.yR.from+=0.5;
-        document.getElementById(objId2).setAttribute("y",cuveN.yR.from);
-        declencheur = true
-    }
+    //stopeur -> robinet fermé
+    if(!stoped) {
+        let declencheur = false;
+        //cercle (objId)
+        if(cuveN.cyC.from < cuveN.cyC.to) {
+            if(cuveN == cuve1) {
+                var strt = 280
+            } else if (cuveN == cuve2){
+                var strt = 680
+            } else if (cuveN == cuve3){
+                var strt = 1420
+            }
+            cuveN.cyC.from+= 0.5;
+            document.getElementById(objId).setAttribute("cy",cuveN.cyC.from);
+            declencheur = true
+    
+            let value = document.getElementById("ellipseM").getAttribute("cy");
+            document.getElementById("ellipseM").setAttribute("cy", ((Number(value) + strt) - cuveN.cyC.from));
+        }
+        //height rect (objId2)
+        if(cuveN.heightR.from > cuveN.heightR.to) {
+            cuveN.heightR.from-=0.5;
+            document.getElementById(objId2).setAttribute("height",cuveN.heightR.from);
+            declencheur = true
+        }
+        //y rect (objId2)
+        if(cuveN.yR.from < cuveN.yR.to) {
+            cuveN.yR.from+=0.5;
+            document.getElementById(objId2).setAttribute("y",cuveN.yR.from);
+            declencheur = true
+        }
 
-    if(declencheur) {
-        await sleep(30);
-        accumulateur(cuveN, objId, objId2);
-        declencheur = false
+        if(declencheur) {
+            await sleep(30);
+            accumulateur(cuveN, objId, objId2);
+            declencheur = false
+        }   
     }
 }
 
