@@ -74,18 +74,18 @@ async function accumulateur(cuveN, objId, objId2) {
         //cercle (objId)
         if(cuveN.cyC.from < cuveN.cyC.to) {
             if(cuveN == cuve1) {
-                var strt = 280
+                var strt = 1720;
             } else if (cuveN == cuve2){
-                var strt = 680
+                var strt = 2120;
             } else if (cuveN == cuve3){
-                var strt = 1420
+                var strt = 2860;
             }
             cuveN.cyC.from+= 0.5;
             document.getElementById(objId).setAttribute("cy",cuveN.cyC.from);
             declencheur = true
     
-            let value = document.getElementById("ellipseM").getAttribute("cy");
-            document.getElementById("ellipseM").setAttribute("cy", ((Number(value) + strt) - cuveN.cyC.from));
+            //let value = document.getElementById("ellipseM").getAttribute("cy");
+            document.getElementById("ellipseM").setAttribute("cy", (strt - cuveN.cyC.from));
         }
         //height rect (objId2)
         if(cuveN.heightR.from > cuveN.heightR.to) {
