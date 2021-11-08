@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Horloge</title>
+</head>
+<body>
+    <svg width="570" height="200" viewBox="-50 -95 220 240">
+        <defs>
+            <line id="H" x1="0" y1="95" x2="0" y2="75" stroke="black" stroke-width="3.8px"/>
+            <line id="M" x1="0" y1="95" x2="0" y2="90" stroke="black" stroke-width="1.2px"/>
+        </defs>
+
+        <g id="bloc">
+            <use href="#H"/>
+            <use href="#M" transform="rotate(6)"/>
+            <use href="#M" transform="rotate(12)"/>
+            <use href="#M" transform="rotate(18)"/>
+            <use href="#M" transform="rotate(24)"/>
+        </g>
+
+        <g>
+            <use href="#bloc" transform="rotate(0)"/>
+            <use href="#bloc" transform="rotate(30)"/>
+            <use href="#bloc" transform="rotate(60)"/>
+            <use href="#bloc" transform="rotate(90)"/>
+            <use href="#bloc" transform="rotate(120)"/>
+            <use href="#bloc" transform="rotate(150)"/>
+            <use href="#bloc" transform="rotate(180)"/>
+            <use href="#bloc" transform="rotate(210)"/>
+            <use href="#bloc" transform="rotate(240)"/>
+            <use href="#bloc" transform="rotate(270)"/>
+            <use href="#bloc" transform="rotate(300)"/>
+            <use href="#bloc" transform="rotate(330)"/>
+        </g>
+
+        <line id="AH" x1="0" y1="0" x2="0" y2="50" stroke="blue" stroke-width="3.8px"/>
+        <line id="AM" x1="0" y1="0" x2="55" y2="55" stroke="red" stroke-width="3.8px"/>
+
+        <circle cx="0" cy="0" r="5"/>
+
+    </svg>
+
+    <div class="slidecontainer">
+        <input type="range" min="1" max="60" value="0" class="slider" id="myRange">
+        <input type="range" min="1" max="12" value="0" class="slider" id="myRange2">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+</body>
+<script src="file.js"></script>
+</html>
