@@ -7,37 +7,73 @@
     <ons-list> </ons-list>
 
     <ons-tabbar swipeable position="auto">
-        <ons-tab page="tab1.html" label="Tab 1" icon="ion-ios-camera" active>
-        </ons-tab>
-        <ons-tab page="tab2.html" label="Tab 2" icon="ion-ios-sunny">
-        </ons-tab>
-        <ons-tab page="tab3.html" label="Tab 3" icon="ion-ios-map">
-        </ons-tab>
-        <ons-tab page="tab4.html" label="Tab 4" icon="ion-ios-code">
-        </ons-tab>
-      </ons-tabbar>
+        <ons-tab page="tab1.html" label="Tab 1" icon="ion-ios-camera" active></ons-tab>
+        <ons-tab page="tab2.html" label="Tab 2" icon="ion-ios-sunny"></ons-tab>
+        <ons-tab page="tab3.html" label="Tab 3" icon="ion-ios-map"></ons-tab>
+        <ons-tab page="tab4.html" label="Tab 4" icon="ion-ios-code"></ons-tab>
+    </ons-tabbar>
 
     <template id="tab1.html">
-      <ons-page id="tab1">
-        <p style="text-align: center;">
-          1
-        </p>
-      </ons-page>
+        <ons-page id="tab1">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button onclick="prev()">
+                        <ons-icon icon="md-chevron-left"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Slider</div>
+                <div class="right">
+                    <ons-toolbar-button onclick="next()">
+                        <ons-icon icon="md-chevron-right"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-carousel fullscreen swipeable auto-scroll overscrollable id="carousel">
+                <ons-carousel-item>
+                    <img src="assets/ski-1.jpg">
+                </ons-carousel-item>
+                <ons-carousel-item>
+                    <img src="assets/ski-2.jpg">
+                </ons-carousel-item>
+                <ons-carousel-item>
+                    <img src="assets/ski-3.jpg">
+                </ons-carousel-item>
+            </ons-carousel>
+        </ons-page>
     </template>
 
     <template id="tab2.html">
-        <ons-page id="tab2">
-          <p style="text-align: center;">
-            2
-          </p>
+        <ons-page id="tab2" style="overflow-y: auto;">
+            <div>
+                    
+            </div>
+            <template id="template-meteo">
+                <ons-card id="carte-meteo">
+                    <div class="title">
+                    Vendredi 12 novembre
+                    </div>
+                    <div class="content">
+                        <ons-row>
+                            <ons-col>Temp.</ons-col>
+                            <ons-col><strong>5°</strong></ons-col>
+                        </ons-row>
+                        <ons-row>
+                            <ons-col>Vent</ons-col>
+                            <ons-col><strong>8KmH</strong></ons-col>
+                        </ons-row>
+                        <ons-row>
+                            <ons-col>UV</ons-col>
+                            <ons-col><strong>0</strong></ons-col>
+                        </ons-row>
+                    </div>
+                </ons-card>
+            </template>
         </ons-page>
       </template>
 
       <template id="tab3.html">
         <ons-page id="tab3">
-          <p style="text-align: center;">
-           3
-          </p>
+            <div id="macarte"></div>
         </ons-page>
       </template>
 

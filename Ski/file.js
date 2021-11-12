@@ -1,3 +1,16 @@
+var prev = function() {
+    var carousel = document.getElementById('carousel');
+    carousel.prev();
+  };
+  
+  var next = function() {
+    var carousel = document.getElementById('carousel');
+    carousel.next();
+  };
+
+  
+
+
 document.addEventListener('init', function(event) {
     //ons-page (event.target)
     var page = event.target;
@@ -8,13 +21,19 @@ document.addEventListener('init', function(event) {
     }
     else if (page.id === 'page2') {
         ChargerStations(page);
-        page.querySelector('ons-toolbar .center').innerHTML += " " + page.data.title;
+        page.querySelector('ons-toolbar .center').innerHTML += " " + page.data.title + " " + page.data.id;
     }
     else if (page.id === 'page3') {
-        page.querySelector('ons-toolbar .center').innerHTML += " " + page.data.title;
+        page.querySelector('ons-toolbar .center').innerHTML += " " + page.data.title + " " + page.data.id;
     }
-    else if (page.id === 'tab1') {
-        console.log(navigator.topPage.data.title);
+   if (page.id === 'tab2') {
+        chargerMeteo(page);
+    }
+    if (page.id === 'tab3') {
+        const mapid = page.querySelector("#macarte");
+        var map = L.map(mapid).setView([48.03795, 6.97124], 11.3);
+        chargerCarte(navigator.topPage, map);
+        chargerPistes(navigator.topPage, map);
     }
 });
 
@@ -33,7 +52,9 @@ function goPageStation(event) {
     document.querySelector('#myNavigator').pushPage('page3.html',
     { data : {
           title : event.currentTarget.dataset.nom,
-          id: event.currentTarget.dataset.id
+          id: event.currentTarget.dataset.id,
+          lng: event.currentTarget.dataset.lng,
+          lat: event.currentTarget.dataset.lat,
       }
     });
 }
@@ -73,6 +94,8 @@ async function ChargerStations(page) {
         const button = clone.querySelector('ons-button');
         button.dataset.id = elt.id;
         button.dataset.nom = elt.nom;
+        button.dataset.lng = elt.lng;
+        button.dataset.lat = elt.lat;
 
         const items = clone.querySelectorAll("span.contenu");
         items[0].textContent = elt.nom;
@@ -81,5 +104,35 @@ async function ChargerStations(page) {
         items[3].textContent = `${elt.altitude_mini ?? `-`} alt mini`;
 
         list.appendChild(clone);
+    });
+}
+
+function chargerMeteo(page) {
+    const template = page.querySelector("#template-meteo");
+    const jour = new Date();
+    for(var i = 0 ; i < 10 ; i++) {
+        const clone = document.importNode(template.content, true);
+        const title = clone.querySelector(".title");
+        title.textContent = jour.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        page.children[0].appendChild(clone);
+        jour.setDate(jour.getDate() + 1);
+    }
+}
+
+function chargerCarte(topPage, map){
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([topPage.data.lat ?? 0, topPage.data.lng ?? 0]).addTo(map)
+        .bindPopup(topPage.data.title).openPopup();
+}
+
+async function chargerPistes(page, map){
+    const couleurs = ['white', 'blue', 'green', 'red', 'black'];
+    const data = await fetch(`https://workshop.neotechweb.net/ws/skimap/1.0.0/pistes.php?station=${page.data.id}`)
+    const json = await data.json();
+    json.forEach(elt => {
+        L.polyline(elt.piste, { color: couleurs[elt.niveau] }).addTo(map);
     });
 }
