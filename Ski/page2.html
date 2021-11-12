@@ -1,0 +1,32 @@
+<ons-page id="page2">
+    <ons-toolbar>
+        <div class="center">Stations</div>
+        <div class="left"><ons-back-button>Massifs</ons-back-button></div>
+    </ons-toolbar>
+    
+    <ons-list> </ons-list>
+    
+    <template id="template-station">
+        <ons-list-item tappable expandable data-id="137" data-nom="Bussang" onclick=""> 
+            <span class="contenu list-item__title">Vosges</span>
+            <span class="contenu list-item__subtitle">10 Stations</span>
+
+            <div class="right">
+                <ons-button modifier="quiet" style="margin-inline-end: 1.5em;" onclick="goPageStation(event)">Accèder</ons-button>
+                <span class="list-item__expand-chevron"></span>
+            </div>
+
+            <div class="expandable-content">
+                <ons-row>
+                    <ons-col>Altitude maxi</ons-col>
+                    <ons-col><span class="contenu data" style="font-weight: bold;">100</span></ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col>Altitude min</ons-col>
+                    <ons-col><span class="contenu data" style="font-weight: bold;">10</span></ons-col>
+                </ons-row>
+            </div>
+
+        </ons-list-item>
+    </template>
+</ons-page>
