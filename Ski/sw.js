@@ -1,2 +1,33 @@
-if(!self.define){const e=e=>{"require"!==e&&(e+=".js");let i=Promise.resolve();return r[e]||(i=new Promise((async i=>{if("document"in self){const r=document.createElement("script");r.src=e,document.head.appendChild(r),r.onload=i}else importScripts(e),i()}))),i.then((()=>{if(!r[e])throw new Error(`Module ${e} didn’t register its module`);return r[e]}))},i=(i,r)=>{Promise.all(i.map(e)).then((e=>r(1===e.length?e[0]:e)))},r={require:Promise.resolve(i)};self.define=(i,s,a)=>{r[i]||(r[i]=Promise.resolve().then((()=>{let r={};const c={uri:location.origin+i.slice(1)};return Promise.all(s.map((i=>{switch(i){case"exports":return r;case"module":return c;default:return e(i)}}))).then((e=>{const i=a(...e);return r.default||(r.default=i),r}))})))}}define("./sw.js",["./workbox-1dedad9c"],(function(e){"use strict";self.addEventListener("message",(e=>{e.data&&"SKIP_WAITING"===e.data.type&&self.skipWaiting()})),e.precacheAndRoute([{url:"app.js",revision:"374b79936b62f29d93f7e48ce85c7264"},{url:"assets/ski-1.jpg",revision:"8e12b82895dc0c38859dadff8d4641e6"},{url:"assets/ski-2.jpg",revision:"f5602398994364106f94becefdef26c9"},{url:"assets/ski-3.jpg",revision:"021c5567c7da6e479bec20d4716e9b65"},{url:"file.js",revision:"29c81632bf102ef3e5566e718e0307ae"},{url:"icons/apple-touch-icon.png",revision:"618b1b53deb953b442ff9a727483f4a8"},{url:"icons/icon-192x192.png",revision:"0649cf9298c7ec1318031516bc080efb"},{url:"icons/icon-256x256.png",revision:"d46df7e78d4d3a9d0c2855fade364b47"},{url:"icons/icon-384x384.png",revision:"adb278446fe3813fefd99ee4330597d7"},{url:"icons/icon-512x512.png",revision:"83086a13f10e17c42f47988a58ba8472"},{url:"icons/maskable_icon.png",revision:"85721dd322a749e3a7f6120be8308e51"},{url:"index.html",revision:"6c332e0e6263c03019d775f903d9bf26"},{url:"leaflet/images/layers-2x.png",revision:"4f0283c6ce28e888000e978e537a6a56"},{url:"leaflet/images/layers.png",revision:"a6137456ed160d7606981aa57c559898"},{url:"leaflet/images/marker-icon-2x.png",revision:"401d815dc206b8dc1b17cd0e37695975"},{url:"leaflet/images/marker-icon.png",revision:"2273e3d8ad9264b7daa5bdbf8e6b47f8"},{url:"leaflet/images/marker-shadow.png",revision:"44a526eed258222515aa21eaffd14a96"},{url:"leaflet/leaflet-src.esm.js",revision:"bdc41cce3cdf67606b6f461f71f80105"},{url:"leaflet/leaflet-src.js",revision:"fe75e9beac23dcbd8ed7d32ec910810e"},{url:"leaflet/leaflet.css",revision:"5c761a156eea82263d8bacf1718fe04d"},{url:"leaflet/leaflet.js",revision:"4eaa81e6e27a89ed2410a7c39048a397"},{url:"manifest.webmanifest",revision:"dd711a09d11147d546cb0d428f8338ec"},{url:"page1.html",revision:"292856c11549f3d26c87f2f42ac8c017"},{url:"page2.html",revision:"26f16b962dd302a675db62826efaaade"},{url:"page3.html",revision:"fc6dd3ce2cce636392cf3546e4922304"},{url:"style.css",revision:"b1933dca0f3440a92fc2b22035666ec9"}],{ignoreURLParametersMatching:[/^utm_/,/^fbclid$/]})}));
-//# sourceMappingURL=sw.js.map
+// 1. Save the files to the user's device
+// The "install" event is called when the ServiceWorker starts up.
+// All ServiceWorker code must be inside events.
+self.addEventListener('install', function(e) {
+    console.log('install');
+  
+    // waitUntil tells the browser that the install event is not finished until we have
+    // cached all of our files
+    e.waitUntil(
+      // Here we call our cache "myonsenuipwa", but you can name it anything unique
+      caches.open('myonsenuipwa').then(cache => {
+        // If the request for any of these resources fails, _none_ of the resources will be
+        // added to the cache.
+        return cache.addAll([
+          '/',
+          '/Ski/index.html',
+          'https://unpkg.com/onsenui/css/onsenui.min.css',
+          'https://unpkg.com/onsenui/css/onsen-css-components.min.css',
+          'https://unpkg.com/onsenui/js/onsenui.min.js'
+        ]);
+      })
+    );
+  });
+  
+  // 2. Intercept requests and return the cached version instead
+  self.addEventListener('fetch', function(e) {
+    e.respondWith(
+      // check if this file exists in the cache
+      caches.match(e.request)
+        // Return the cached file, or else try to get it from the server
+        .then(response => response || fetch(e.request))
+    );
+  })
