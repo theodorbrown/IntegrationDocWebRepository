@@ -10,7 +10,7 @@
         font-family="Arial"
         font-size="20"
         fill="white">
-        TEMPÉRATURE
+        TEMPERATURE
     </text>
     <path d="M0 470 Q 140 400 300 470" stroke="white" fill="transparent" stroke-width="3"/>
 
